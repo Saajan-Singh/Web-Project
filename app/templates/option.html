@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoviVerse - Select Your Favorite Actors</title>
+    <style>
+        body {
+        background-color:#1a1a1a;
+        color: white;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    .logo {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+    .logo img {
+        width: 200px; /* Adjust size as needed */
+    }
+    .container {
+        max-width: 900px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 15px;
+        padding-top: 80px; /* Space for the logo */
+    }
+
+        .actor {
+            background-color: #222;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .actor img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .actor p {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .selected {
+            border: 3px solid yellow;
+        }
+        .next-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            background-color: rgb(244, 196, 35);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .next-button:hover {
+            background-color: rgb(230, 180, 30);
+        }
+    </style>
+    <script>
+        let selectedActors = [];
+        function selectActor(element, name) {
+            if (selectedActors.includes(name)) {
+                selectedActors = selectedActors.filter(actor => actor !== name);
+                element.classList.remove('selected');
+            } else if (selectedActors.length < 5) {
+                selectedActors.push(name);
+                element.classList.add('selected');
+            } else {
+                alert('You can only select up to 5 actors.');
+            }
+            console.log(selectedActors);
+        }
+
+        function goToNextPage() {
+            if (selectedActors.length === 0) {
+                alert('Please select at least one actor.');
+                return;
+            }
+            console.log("Selected Actors:", selectedActors);
+            // Example: Navigate to another page
+            // window.location.href = "nextpage.html";
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Logo Section -->
+    <div class="logo">
+        <img src="Screenshot 2025-02-20 005034.png" alt="MoviVerse Logo">
+    </div>
+
+    <h1>Select Your Top 5 Actors & Actresses</h1>
+    <p>Click on the actors you love the most to add them to your favorites!</p>
+    
+    <div class="container">
+        <div class="actor" onclick="selectActor(this, 'Leonardo DiCaprio')">
+            <img src="Leonardo DiCaprio.webp" alt="Leonardo DiCaprio">
+            <p>Leonardo DiCaprio</p>
+        </div>
+        <div class="actor" onclick="selectActor(this, 'Shah Rukh Khan')">
+            <img src="Shah Rukh Khan.jpg" alt="Shah Rukh Khan">
+            <p>Shah Rukh Khan</p>
+        </div>
+        <div class="actor" onclick="selectActor(this, 'Brad Pitt')"><img src="Brad Pitt.jpg" alt=""><p>Brad Pitt</p></div>
+        <div class="actor" onclick="selectActor(this, 'Amitabh Bachchan')"><img src="Amitabh Bachchan.webp" alt=""><p>Amitabh Bachchan</p></div>
+        <div class="actor" onclick="selectActor(this, 'Diljit Dosanjh')"><img src="diljit.jpg" alt=""><p>Diljit Dosanjh</p></div>
+        <div class="actor" onclick="selectActor(this, 'Deepika Padukone')"><img src="Deepika Padukone.jpg" alt=""><p>Deepika Padukone</p></div>
+        <div class="actor" onclick="selectActor(this, 'Robert Downey Jr.')"><img src="Robert Downey Jr.jpg" alt=""><p>Robert Downey Jr.</p></div>
+        <div class="actor" onclick="selectActor(this, 'Priyanka Chopra')"><img src="Priyanka Chopra.webp" alt=""><p>Priyanka Chopra</p></div>
+        <div class="actor" onclick="selectActor(this, 'Chris Hemsworth')"><img src="Chris Hemsworth.jpg" alt=""><p>Chris Hemsworth</p></div>
+        <div class="actor" onclick="selectActor(this, 'Ranbir Kapoor')"><img src="Ranbir Kapoor.jpg" alt=""><p>Ranbir Kapoor</p></div>
+        <div class="actor" onclick="selectActor(this, 'Scarlett Johansson')"><img src="Scarlett Johansson.webp" alt=""><p>Scarlett Johansson</p></div>
+        <div class="actor" onclick="selectActor(this, 'Hrithik Roshan')"><img src="Hrithik Roshan.jpg" alt=""><p>Hrithik Roshan</p></div>
+        <div class="actor" onclick="selectActor(this, 'Tom Cruise')"><img src="Tom Cruise.jpg" alt=""><p>Tom Cruise</p></div>
+        <div class="actor" onclick="selectActor(this, 'Alia Bhatt')"><img src="Alia Bhatt.webp" alt=""><p>Alia Bhatt</p></div>
+        <div class="actor" onclick="selectActor(this, 'Will Smith')"><img src="Will Smith.avif" alt=""><p>Will Smith</p></div>
+        <div class="actor" onclick="selectActor(this, 'Salman Khan')"><img src="Salman Khan.webp" alt=""><p>Salman Khan</p></div>
+        <div class="actor" onclick="selectActor(this, 'Jennifer Lawrence')"><img src="Jennifer Lawrence.jpg" alt=""><p>Jennifer Lawrence</p></div>
+        <div class="actor" onclick="selectActor(this, 'Katrina Kaif')"><img src="Katrina Kaif.webp" alt=""><p>Katrina Kaif</p></div>
+        <div class="actor" onclick="selectActor(this, 'Sonam Bajwa')"><img src="sonam.webp" alt=""><p>Sonam Bajwa</p></div>
+        <div class="actor" onclick="selectActor(this, 'Kareena Kapoor')"><img src="Kareena Kapoor.jpg" alt=""><p>Kareena Kapoor</p></div>
+    </div>
+
+    <button class="next-button" onclick="goToNextPage()">Next</button>
+
+</body>
+</html>

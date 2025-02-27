@@ -1,0 +1,144 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    background-color: #141414;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('https://123movies.lu/images/landing/landing.jpg');
+    background-size: cover;
+    background-position: center;
+    animation: fadeInBackground 1.5s ease-in-out forwards;
+}
+
+@keyframes fadeInBackground {
+    from {
+        filter: brightness(70%);
+    }
+    to {
+        filter: brightness(100%);
+    }
+}
+
+
+
+/* Container */
+.login-container {
+    background: rgba(51, 51, 51, 0.9);
+    padding: 2.5rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    animation: fadeInScale 0.8s ease-out forwards;
+    margin-top: 7rem;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: rgb(244, 196, 35);
+    animation: fadeInText 1s ease-in;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+    background-color: #1e1e1e;
+    color: white;
+    outline: none;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    box-shadow: 0 0 10px rgb(244, 196, 35);
+    background-color: #292929;
+}
+
+button {
+    width: 100%;
+    background-color: rgb(244, 196, 35);
+    color: white;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: rgb(214, 176, 30);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(244, 196, 35, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+
+
+@media (max-width: 600px) {
+    .login-container {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+}

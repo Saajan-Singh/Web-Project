@@ -1,0 +1,1100 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        IMDB Clone
+    </title>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/0827ac2286.js">
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000000;
+            font-weight: bold;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            white-space: nowrap;
+        }
+
+        .navbar a:hover {
+            color: #ddd;
+        }
+
+        .navbar .logo img {
+            height: 45px;
+            width: 82px;
+            margin-top: 8px;
+            margin-left: 5px;
+            border-radius: 5px;
+        }
+
+        .navbar .Pro {
+            margin-left: 20px;
+        }
+
+        .navbar .main {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .navbar .main .search-container {
+            display: flex;
+            align-items: center;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: white;
+            margin-left: 15px;
+        }
+
+        .navbar .main .search-container .dropdown {
+            display: flex;
+            align-items: center;
+            background-color: #e5e7eb;
+            padding: 8px 16px;
+        }
+
+        .navbar .main .search-container .dropdown span {
+            font-weight: 600;
+        }
+
+        .navbar .main .search-container .dropdown i {
+            margin-left: 8px;
+        }
+
+        .navbar .main .search-container .search-input {
+            flex-grow: 1;
+            padding: 8px 16px;
+            border: none;
+            outline: none;
+            width: 550px;
+        }
+
+        .navbar .main .search-container .search-icon {
+            display: flex;
+            align-items: center;
+            background-color: #e5e7eb;
+            padding: 8px 16px;
+        }
+
+        .navbar .main .search-container .search-icon i {
+            color: black;
+        }
+
+        .navbar .main a:first-child {
+            margin-right: 0;
+        }
+
+        .navbar .main .Menu {
+            margin-left: 5px;
+        }
+
+        .navbar .main a[href="#"]:nth-last-of-type(2) {
+            margin-right: 5px;
+        }
+
+        .navbar .main a[href=""]:last-child {
+            margin-left: 0;
+        }
+
+        .navbar .main .search-container .dropdown span {
+            color: black;
+        }
+
+        .navbar .main .search-container .dropdown i {
+            color: black;
+        }
+
+        .menu-container {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            width: 250px;
+        }
+
+        .menu-container:hover .dropdown-menu {
+            display: block;
+        }
+
+        .nav-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f5c518;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 5px 0;
+            color: white;
+        }
+
+        .nav-links a:hover {
+            color: #f5c518;
+        }
+
+
+        /* Main Content */
+        .MainContent {
+            display: grid;
+            place-items: center;
+            margin-top: 20px;
+        }
+
+        .MainContent .first {
+            height: 600px;
+            border-radius: 20px;
+            width: 82%;
+            display: grid;
+            grid-template-columns: 70% 30%;
+            grid-template-rows: 8% 28% 28% 28% 8%;
+        }
+
+        .item1 {
+            grid-column: 1/2;
+            grid-row: 1/6;
+        }
+
+        .item1>img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .item2 {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+            font-weight: bold;
+            color: rgb(223, 199, 54);
+            font-size: 23px;
+        }
+
+        .item3,
+        .item4,
+        .item5 {
+            display: flex;
+            background-color: #1a1a1a;
+            padding: 10px;
+            border-radius: 8px;
+            width: 340px;
+            color: white;
+            align-items: center;
+            gap: 12px;
+            margin: 10px;
+        }
+
+        .item3>img {
+            height: 150px;
+            width: 100px;
+            border-radius: 10px;
+        }
+
+        .thumbnail {
+            width: 110px;
+            height: 135px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: flex-start;
+        }
+
+        .title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 5px;
+            text-align: left;
+        }
+
+
+        .top-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .play-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .play-button i {
+            color: white;
+            font-size: 14px;
+        }
+
+        .duration {
+            font-size: 14px;
+            color: gray;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: gray;
+        }
+
+        .icons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .icons i {
+            color: white;
+        }
+
+        .icons span {
+            font-size: 14px;
+        }
+
+        .item6 {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+            font-size: 23px;
+        }
+
+
+        .flip-container1,
+        .flip-container2,
+        .flip-container3 {
+            perspective: 1000px;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .flipper1,
+        .flipper2,
+        .flipper3 {
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        .front1,
+        .front2,
+        .front3,
+        .back1,
+        .back2,
+        .back3 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .front1,
+        .front2,
+        .front3 {
+            background-color: #1a1a1a;
+            display: flex;
+            gap: 12px;
+        }
+
+
+        .back1,
+        .back2,
+        .back3 {
+            background-color: #1a1a1a;
+            color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flip-container1:hover .flipper1 {
+            transform: rotateY(180deg);
+        }
+
+        .flip-container2:hover .flipper2 {
+            transform: rotateY(180deg);
+        }
+
+        .flip-container3:hover .flipper3 {
+            transform: rotateY(180deg);
+        }
+
+
+
+        h2 {
+            color: rgb(255, 255, 255);
+            margin-left: 9%;
+            padding-top: 25px;
+        }
+
+        h2>i {
+            font-size: 20px;
+        }
+
+        .Celebrities {
+            padding-left: 135px;
+            padding-top: 10px;
+            padding-bottom: 25px;
+        }
+
+        .Celebrities>div {
+            display: inline-block;
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+        }
+
+        .Celebrities>div>img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .Celebrities>div>.secondimg {
+            margin-left: 20px;
+        }
+
+        .Celebrities>div>p {
+            display: flex;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        h1 {
+            margin-left: 9%;
+            color: rgb(223, 199, 54);
+        }
+
+        h2 .TopPicks {
+            margin-left: 9%;
+        }
+
+        .TopPicks>p {
+            margin-top: -10px;
+            margin-left: 9%;
+            color: grey;
+        }
+
+        .TopPicsMovies {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 20px;
+        }
+
+        .TopPicsMovies>div {
+            display: inline-block;
+            height: 450px;
+            width: 190px;
+            margin: 10px;
+            border-radius: 10px;
+            background-color: rgb(26, 26, 26);
+        }
+
+        .TopPicsMovies>div>img {
+            height: 60%;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .TopPicsMovies>div>div>i {
+            margin-top: 20px;
+            margin-left: 10px;
+            color: rgb(223, 199, 54);
+        }
+
+        .TopPicsMovies .MovieName {
+            margin-left: 10px;
+        }
+
+        .TopPicsMovies .WatchOptions {
+            background-color: rgb(44, 44, 44);
+            height: 30px;
+            width: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px auto;
+            border-radius: 10px;
+            color: rgb(91, 152, 226);
+            font-weight: bold;
+        }
+
+        .TopPicsMovies .Trailer1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            color: white;
+            font-size: 13px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .TopPicsMovies .Trailer2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            color: white;
+            font-size: 13px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .TopPicsMovies .Trailer1 i {
+            margin-right: 5px;
+            color: white;
+        }
+
+        .TopPicsMovies .Trailer2 i {
+            margin-right: 5px;
+            color: white;
+        }
+
+        .fa-regular.fa-star {
+            color: blue;
+        }
+
+
+        /* Footer */
+        .footer {
+            padding: 20px;
+            padding-top: 100px;
+            text-align: center;
+        }
+
+        .footer .button {
+            background-color: #f5c518;
+            color: black;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 9999px;
+            margin-bottom: 24px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .footer .social,
+        .footer .app {
+            margin-bottom: 24px;
+        }
+
+        .footer .social span,
+        .footer .app span {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .footer .social-icons a,
+        .footer .app span {
+            margin: 0 8px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer .social-icons a:hover,
+        .footer .links a:hover {
+            color: #f5c518;
+        }
+
+        .footer .links {
+            margin-bottom: 24px;
+        }
+
+        .footer .links a {
+            color: #888;
+            text-decoration: none;
+            margin: 0 8px;
+            font-size: 14px;
+        }
+
+        .footer .footer-text {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .footer .footer-text span {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img alt="" src="{{ url_for('static', filename='Logo.jpg') }}" />
+        </div>
+        <div class="main">
+            <div class="menu-container">
+                <a href="" class="menu-icon">
+                    <i class="fa-solid fa-bars"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <header>
+                        <img src="Screenshot 2025-02-20 005034.png" alt="MoviVerse Logo" />
+                        <button class="close-btn">✕</button>
+                    </header>
+                    <div class="nav-container">
+                        <div class="nav-section">
+                            <div class="section-title"><i>🎬</i> Movies</div>
+                            <div class="nav-links">
+                                <a href="#">Release Calendar</a>
+                                <a href="#">Top 250 Movies</a>
+                                <a href="#">Most Popular Movies</a>
+                                <a href="#">Browse Movies by Genre</a>
+                                <a href="#">Top Box Office</a>
+                                <a href="#">Showtimes & Tickets</a>
+                                <a href="#">Movie News</a>
+                                <a href="#">India Movie Spotlight</a>
+                            </div>
+                        </div>
+                        <div class="nav-section">
+                            <div class="section-title"><i>📺</i> TV Shows</div>
+                            <div class="nav-links">
+                                <a href="#">What's on TV & Streaming</a>
+                                <a href="#">Top 250 TV Shows</a>
+                                <a href="#">Most Popular TV Shows</a>
+                                <a href="#">Browse TV Shows by Genre</a>
+                                <a href="#">TV News</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="Menu" href="">Menu</a>
+            <div class="search-container">
+                <div class="dropdown"><span>All</span><i class="fas fa-caret-down"></i></div>
+                <input class="search-input" placeholder="Search IMDb" type="text" />
+                <div class="search-icon"><i class="fas fa-search"></i></div>
+            </div>
+            <a class="Pro" href="#">MVPro</a>
+            <a href="#"><i class="fa-regular fa-bookmark"></i> Watchlist</a>
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('logout') }}"><i class="fa-solid fa-user"></i></a>
+            {% else %}
+            <a class="sign-in" href="{{ url_for('signup') }}">Sign In</a>
+            {% endif %}
+            <a href="{{ url_for('about') }}">About</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="MainContent">
+        <div class="first">
+
+            <div class="item1"><img src="{{ url_for('static', filename='poster.jpg')}}" alt="poster"></div>
+
+            <div class="item2">Up Next</div>
+
+            <div class="item3">
+                <div class="flip-container1">
+                    <div class="flipper1">
+                        <!-- Front Side (Thumbnail) -->
+                        <div class="front1">
+                            <div class="thumbnail">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4wa5bKRCN4UGvNVZS_1e4y2Y0FtXSwQwrnQ&s"
+                                    alt="">
+                            </div>
+                            <div class="content">
+                                <div class="top-row">
+                                    <div class="play-button">
+                                        <a href="https://www.youtube.com/watch?v=49_44FFKZ1M"><i
+                                                class="fas fa-play"></i></a>
+                                    </div>
+                                    <div class="duration">1:33</div>
+                                </div>
+                                <div class="title">Alice In Borderland</div>
+                                <div class="subtitle">With Kento Yamazaki & Tao Tsuchiya</div>
+                                <div class="icons">
+                                    <i class="far fa-thumbs-up"></i> <span>35</span>
+                                    <i class="fa-solid fa-hands-clapping"></i> <span>4</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Back Side (Flipped Content) -->
+                        <div class="back1">
+                            <div>Alice in Borderland is a dystopian thriller that
+                                follows Ryohei Arisu (Kento Yamazaki) as he is transported to a parallel universe where
+                                survival hinges on winning intense, high-stakes games
+                            </div>
+                            <div>No. Of Seasons :- 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item4">
+                <div class="flip-container2">
+                    <div class="flipper2">
+                        <!-- Front Side (Thumbnail) -->
+                        <div class="front2">
+                            <div class="thumbnail">
+                                <img src="https://rukminim2.flixcart.com/image/850/1000/xif0q/poster/h/d/k/medium-squid-game-hd-poster-for-wall-decor-a3-poster-squid-game-original-imagv2vxrqtudpet.jpeg?q=90&crop=false"
+                                    alt="">
+                            </div>
+                            <div class="content">
+                                <div class="top-row">
+                                    <div class="play-button">
+                                        <a href="https://www.youtube.com/watch?v=oqxAJKy0ii4"><i
+                                                class="fas fa-play"></i></a>
+                                    </div>
+                                    <div class="duration">1:33</div>
+                                </div>
+                                <div class="title">Squid Game</div>
+                                <div class="subtitle">With Lee Jung-jae & Lee Byung-hun</div>
+                                <div class="icons">
+                                    <i class="far fa-thumbs-up"></i> <span>35</span>
+                                    <i class="fa-solid fa-hands-clapping"></i> <span>4</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Back Side (Flipped Content) -->
+                        <div class="back2">
+                            <div>In Squid Game A group of deeply indebted individuals are lured into a mysterious
+                                competition where they play deadly children's games for a huge cash prize, but losing
+                                means instant death, forcing them to confront the depths of human morality to survive.
+                            </div>
+                            <div>No. Of Seasons :- 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item5">
+                <div class="flip-container3">
+                    <div class="flipper3">
+                        <!-- Front Side (Thumbnail) -->
+                        <div class="front3">
+                            <div class="thumbnail">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt-G01abUcrkDtGdlBr0hsxa3-VtKoialxhQ&s"
+                                    alt="">
+                            </div>
+                            <div class="content">
+                                <div class="top-row">
+                                    <div class="play-button">
+                                        <a href="https://www.youtube.com/watch?v=pDHqAj4eJcM"><i
+                                                class="fas fa-play"></i></a>
+                                    </div>
+                                    <div class="duration">1:33</div>
+                                </div>
+                                <div class="title">From</div>
+                                <div class="subtitle">With Harold Perrineau & Eion Bailey</div>
+                                <div class="icons">
+                                    <i class="far fa-thumbs-up"></i> <span>35</span>
+                                    <i class="fa-solid fa-hands-clapping"></i> <span>4</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Back Side (Flipped Content) -->
+                        <div class="back3">
+                            <div>In From people become trapped in a mysterious town where they are forced to confront
+                                terrifying creatures that emerge at night, desperately searching for a way to escape
+                                while uncovering the town's dark secrets and the reason behind their imprisonment.</div>
+                            <div>No. Of Seasons :- 3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item6">Browse Trailer ></div>
+        </div>
+    </div>
+
+    <h2>Most Popular Celebrities <i class="fa-solid fa-greater-than"></i></h2>
+
+    <div class="Celebrities">
+        <div><img src="https://wallpaperaccess.com/full/2420026.jpg" alt="">
+            <p>Johnny Depp</p>
+        </div>
+        <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzF9izOKRy5CjbPWt6X1HGXql6xCq-fN8bcw&s"
+                alt="">
+            <p>Elizabeth Olsen</p>
+        </div>
+        <div><img src="https://wallpapers.com/images/hd/aged-tom-cruise-vfq0ibilahlxh7v8.jpg" alt="">
+            <p>Tom Cruise</p>
+        </div>
+        <div><img
+                src="https://c4.wallpaperflare.com/wallpaper/360/686/462/scarlett-johansson-women-actress-wallpaper-preview.jpg"
+                alt="">
+            <p>Scarlett Johansson</p>
+        </div>
+        <div><img src="https://wallpapers.com/images/high/chris-evans-with-beard-iyyy5dl9rtuekeyg.webp" alt="">
+            <p>Chris Evans</p>
+        </div>
+        <div><img
+                src="https://c4.wallpaperflare.com/wallpaper/460/724/983/megan-fox-looking-at-viewer-blue-eyes-celebrity-wallpaper-preview.jpg"
+                alt="">
+            <p>Megan Fox</p>
+        </div>
+    </div>
+
+    <h1>What To Watch</h1>
+
+    <div class="TopPicks">
+        <h2>Top Picks <i class="fa-solid fa-greater-than"></i></h2>
+        <p>TV shows and movie just for you</p>
+    </div>
+
+    <div class="TopPicsMovies">
+        <div>
+            <img src="https://rukminim2.flixcart.com/image/850/1000/l01blow0/poster/b/v/c/medium-suits-on-good-quality-hd-quality-wallpaper-poster-original-imagbx2pqhy9ctsu.jpeg?q=90&crop=false"
+                alt="">
+            <div><i class="fa-solid fa-star"></i>&nbsp;8.7 &nbsp;&nbsp;<i class="fa-regular fa-star"></i></div>
+            <div class="MovieName">
+                <h4>1. Suits</h4>
+            </div>
+            <div class="WatchOptions">
+                <p>Watch Options</p>
+            </div>
+            <a class="Trailer1" href="https://www.youtube.com/watch?v=85z53bAebsI">
+                <div>
+                    <i class="fa-solid fa-play"> &nbsp;Trailer</i>
+                </div>
+            </a>
+        </div>
+        <div>
+            <img src="https://i.pinimg.com/736x/03/c6/d9/03c6d90c30b1cc6a54710e87ec7333b8.jpg" alt="">
+            <div><i class="fa-solid fa-star"></i>&nbsp;8.5 &nbsp;&nbsp;<i class="fa-regular fa-star"></i></div>
+            <div class="MovieName">
+                <h4>2. F.R.I.E.N.D.S</h4>
+            </div>
+            <div class="WatchOptions">
+                <p>Watch Options</p>
+            </div>
+            <a class="Trailer1" href="https://www.youtube.com/watch?v=RasWhgd4vao">
+                <div>
+                    <i class="fa-solid fa-play"> &nbsp;Trailer</i>
+                </div>
+            </a>
+        </div>
+        <div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjW09R1Z3OW1r5nJpUV7AlvcE2VI1lZL3OFg&s"
+                alt="">
+            <div><i class="fa-solid fa-star"></i>&nbsp;8.2 &nbsp;&nbsp;<i class="fa-regular fa-star"></i></div>
+            <div class="MovieName">
+                <h4>3. Peaky Blinders</h4>
+            </div>
+            <div class="WatchOptions">
+                <p>Watch Options</p>
+            </div>
+            <a class="Trailer1" href="https://www.youtube.com/watch?v=Ruyl8_PT_y8">
+                <div>
+                    <i class="fa-solid fa-play"> &nbsp;Trailer</i>
+                </div>
+            </a>
+        </div>
+        <div>
+            <img src="https://w0.peakpx.com/wallpaper/276/246/HD-wallpaper-you-season-3-3-netflix-joe-goldberg.jpg"
+                alt="">
+            <div><i class="fa-solid fa-star"></i>&nbsp;7.9 &nbsp;&nbsp;<i class="fa-regular fa-star"></i></div>
+            <div class="MovieName">
+                <h4>4. YOU</h4>
+            </div>
+            <div class="WatchOptions">
+                <p>Watch Options</p>
+            </div>
+            <a class="Trailer1" href="http://youtube.com/watch?v=ga1m0wjzscU&t=17s">
+                <div>
+                    <i class="fa-solid fa-play"> &nbsp;Trailer</i>
+                </div>
+            </a>
+        </div>
+        <div>
+            <img src="https://w0.peakpx.com/wallpaper/1003/896/HD-wallpaper-fifty-shades-darker-grey.jpg" alt="">
+            <div><i class="fa-solid fa-star"></i>&nbsp;7.5 &nbsp;&nbsp;<i class="fa-regular fa-star"></i></div>
+            <div class="MovieName">
+                <h4>5. Fifty Shades Of Grey</h4>
+            </div>
+            <div class="WatchOptions">
+                <p>Watch Options</p>
+            </div>
+            <a class="Trailer1" href="https://www.youtube.com/watch?v=SfZWFDs0LxA">
+                <div>
+                    <i class="fa-solid fa-play"> &nbsp;Trailer</i>
+                </div>
+            </a>
+        </div>
+        <div>
+            <img src="https://i.pinimg.com/736x/ae/8c/21/ae8c21bc78b35923cdd54ef5868915ef.jpg" alt="">
+            <div><i class="fa-solid fa-star"></i>&nbsp;9.1 &nbsp;&nbsp;<i class="fa-regular fa-star"></i></div>
+            <div class="MovieName">
+                <h4>6. Game Of Thrones</h4>
+            </div>
+            <div class="WatchOptions">
+                <p>Watch Options</p>
+            </div>
+            <a class="Trailer1" href="http://youtube.com/watch?v=KPLWWIOCOOQ">
+                <div>
+                    <i class="fa-solid fa-play"> &nbsp;Trailer</i>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <h2>Trending on Moviverse this week</h2>
+    <div class="TopPicsMovies">
+        <div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiwbJh6rgD5-n22Cm-Dz0-wVqJUng8dNco_w&s"
+                alt="">
+            <div><i class="fa-solid fa-star"></i>&nbsp;8.7 &nbsp;&nbsp;<i class="fa-regular fa-star"></i></div>
+            <div class="MovieName">
+                <h4>1. Black Warrent</h4>
+            </div>
+            <div class="WatchOptions">
+                <p>Watch Options</p>
+            </div>
+            <a href="https://www.youtube.com/watch?v=V8Yo_nxY9qs">
+                <div class="Trailer2">
+                    <i class="fa-solid fa-play"> &nbsp;Trailer</i>
+                </div>
+            </a>
+        </div>
+        <div>
+            <img src=https://m.media-amazon.com/images/M/MV5BZmZmZDc0ZTUtNzY1MS00OWQwLTg1MjctYWVlYzQ4NTk0YTU4XkEyXkFqcGc@._V1_.jpg"
+                alt="">
+            <div><i class="fa-solid fa-star"></i>&nbsp;8.5 &nbsp;&nbsp;<i class="fa-regular fa-star"></i></div>
+            <div class="MovieName">
+                <h4>2. Laila Majnu</h4>
+            </div>
+            <div class="WatchOptions">
+                <p>Watch Options</p>
+            </div>
+            <a href="https://www.youtube.com/watch?v=Cv-6cAHanZ8">
+                <div class="Trailer2">
+                    <i class="fa-solid fa-play"> &nbsp;Trailer</i>
+                </div>
+            </a>
+        </div>
+        <div>
+            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/0543e414960770.560379c5290a8.jpg" alt="">
+            <div><i class="fa-solid fa-star"></i>&nbsp;8.2 &nbsp;&nbsp;<i class="fa-regular fa-star"></i></div>
+            <div class="MovieName">
+                <h4>3. Rockstar</h4>
+            </div>
+            <div class="WatchOptions">
+                <p>Watch Options</p>
+            </div>
+            <a href="https://www.youtube.com/watch?v=bD5FShPZdpw">
+                <div class="Trailer2">
+                    <i class="fa-solid fa-play"> &nbsp;Trailer</i>
+                </div>
+            </a>
+        </div>
+        <div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqPQnw2cjRwW3nf9FD2ufYxEdIlDeZgkCoTA&s"
+                alt="">
+            <div><i class="fa-solid fa-star"></i>&nbsp;7.9 &nbsp;&nbsp;<i class="fa-regular fa-star"></i></div>
+            <div class="MovieName">
+                <h4>4. Pushpa 2</h4>
+            </div>
+            <div class="WatchOptions">
+                <p>Watch Options</p>
+            </div>
+            <a href="https://www.youtube.com/watch?v=1kVK0MZlbI4">
+                <div class="Trailer2">
+                    <i class="fa-solid fa-play"> &nbsp;Trailer</i>
+                </div>
+            </a>
+        </div>
+        <div>
+            <img src="https://external-preview.redd.it/official-first-poster-for-venom-the-last-dance-v0-QRoTFuj9xNnWiaJ5TZveODcuYA2WwSaRsMVXdb3kAJ8.jpg?width=640&crop=smart&auto=webp&s=88b1953dc6b0733bcd3482038f51fd3060fe0ea8"
+                alt="">
+            <div><i class="fa-solid fa-star"></i>&nbsp;7.5 &nbsp;&nbsp;<i class="fa-regular fa-star"></i></div>
+            <div class="MovieName">
+                <h4>5. Venom 3</h4>
+            </div>
+            <div class="WatchOptions">
+                <p>Watch Options</p>
+            </div>
+            <a href="https://www.youtube.com/watch?v=HyIyd9joTTc">
+                <div class="Trailer2">
+                    <i class="fa-solid fa-play"> &nbsp;Trailer</i>
+                </div>
+            </a>
+        </div>
+        <div>
+            <img src="https://m.media-amazon.com/images/M/MV5BMWQ4YWYxYTAtZTlhNC00Nzc3LWE3OWUtZjY5MThlNWNiYTBiXkEyXkFqcGc@._V1_.jpg"
+                alt="">
+            <div><i class="fa-solid fa-star"></i>&nbsp;9.1 &nbsp;&nbsp;<i class="fa-regular fa-star"></i></div>
+            <div class="MovieName">
+                <h4>6. Back In Action</h4>
+            </div>
+            <div class="WatchOptions">
+                <p>Watch Options</p>
+            </div>
+            <a href="https://www.youtube.com/watch?v=MV2nYw6gL_w">
+                <div class="Trailer2">
+                    <i class="fa-solid fa-play"> &nbsp;Trailer</i>
+                </div>
+            </a>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+    <!-- Footer -->
+    <div class="footer">
+        <button class="button">
+            Sign in for more access
+        </button>
+        <div class="social">
+            <span>
+                Follow MoviVerse on social
+            </span>
+            <div class="social-icons">
+                <a href="#">
+                    <i class="fab fa-tiktok">
+                    </i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-instagram">
+                    </i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-xing">
+                    </i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-youtube">
+                    </i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-facebook">
+                    </i>
+                </a>
+            </div>
+        </div>
+        <div class="app">
+            <span>
+                Get the MoviVerse app
+            </span>
+            <span>
+                For Android and iOS
+            </span>
+            <img alt="QR code for IMDb app download" height="100"
+                src="https://storage.googleapis.com/a1aa/image/P8rfyptGYCpSdn5rUSrsPkKm4MD9BYwKUlYx7FdDkU4.jpg"
+                width="100">
+            </img>
+        </div>
+        <div class="links">
+            <a href="#">
+                Help
+            </a>
+            <a href="#">
+                Site Index
+            </a>
+            <a href="#">
+                MVPro
+            </a>
+            <a href="#">
+                Box Office Mojo
+            </a>
+            <a href="#">
+                License IMDb Data
+            </a>
+            <a href="#">
+                Press Room
+            </a>
+            <a href="#">
+                Advertising
+            </a>
+            <a href="#">
+                Jobs
+            </a>
+            <a href="#">
+                Conditions of Use
+            </a>
+            <a href="#">
+                Privacy Policy
+            </a>
+            <a href="#">
+                Your Ads Privacy Choices
+            </a>
+        </div>
+        <div class="footer-text">
+            an
+            <span>
+                amazon
+            </span>
+            company
+        </div>
+        <div class="footer-text">
+            © 1990-2025 by IMDb.com, Inc.
+        </div>
+    </div>
+</body>
+
+</html>
